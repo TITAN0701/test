@@ -1,0 +1,6 @@
+CREATE TABLE tom(NAME int(20),ID int(20),EMAIL  VARCHAR(60));  建立tom 的資料欄位
+
+INSERT INTO `tom` (`NAME`, `ID`, `EMAIL`) VALUES ('55688', '55', '565689@GMAIL.COM'), ('99999', '54', 'GHH888@GMAI.COM');
+鍵入兩筆資料 
+
+

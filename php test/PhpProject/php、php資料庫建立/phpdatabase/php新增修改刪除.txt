@@ -1,0 +1,70 @@
+總共寫四個PHP檔
+main、insert、update、delete。按下主畫面的按鈕後將輸入的值傳到下一個頁面並讀出處理後的資料。
+
+main.php
+
+<html><head>
+<title>資料庫管理</title>
+</head><body>
+
+ <?php
+  echo '請輸入資料'."<p>";
+ ?>
+ 
+<form action="" name="form1" method="Post">
+
+ 學號：<Input Type="text" Name="number"><p>
+ 姓名：<Input Type="text" Name="name"><p>
+ 國中：<Input Type="text" Name="junior"><p>
+ 志願：<Input Type="text" Name="wish"><p>
+ 
+ <input type="button" value="新增" type="submit" onclick="form1.action='insert.php';form1.submit();"/>
+    <input type="button" value="修改" type="submit" onclick="form1.action='update.php';form1.submit();"/>
+ <input type="button" value="刪除" type="submit" onclick="form1.action='delete.php';form1.submit();"/>
+
+</form>
+
+
+</BODY></HTML>
+
+</body></html>
+
+
+insert.php
+
+<?php   
+ $dbhost = 'IP或網址';   
+ $dbuser = '資料庫帳號';   
+ $dbpass = '資料庫密碼';   
+ $dbname = '資料庫名稱';
+
+ $number =$_REQUEST['number'];
+ $name = $_REQUEST['name'];
+ $junior = $_REQUEST['junior'];
+ $wish = $_REQUEST['wish'];
+ 
+ $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error with MySQL connection');
+  
+  mysql_query("SET NAMES 'utf8'");
+  mysql_select_db($dbname);   
+  
+  $sql_insert = "INSERT INTO 表單名稱(number, name, junior, wish) VALUES ('$number','$name','$junior','$wish')";
+  $result = mysql_query($sql_insert) or die('MySQL insert error');
+  
+  $sql_query = "select * from 表單名稱";
+  $result = mysql_query($sql_query) or die('MySQL query error');
+  
+  while($row = mysql_fetch_array($result))
+  {
+   echo $row['number']."<br>";
+   echo $row['name']."<br>";
+   echo $row['junior']."<br>";
+   echo $row['wish']."<br><br>"; 
+  }
+?>
+
+修改其刪除把$sql_insert = "INSERT INTO 表單名稱(number, name, junior, wish) VALUES ('$number','$name','$junior','$wish')";改成以下即可
+
+修改: $sql_update = "Update 表單名稱 Set number = '$number', name = '$name', junior = '$junior', wish = '$wish' WHERE number = '$number'";
+
+刪除: $sql_delete = "DELETE FROM  表單名稱 Where number = '$number'";
